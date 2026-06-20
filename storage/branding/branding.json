@@ -1,0 +1,38 @@
+_data/branding.yml
+
+# Name & Tagline
+site_name: "HasMerch"
+tagline: "Your one-stop shop for custom merchandise"
+
+# Fonts
+fonts:
+  main: "'Oswald', sans-serif"
+  secondary: "'Open Sans', sans-serif"
+
+# Colors
+colors:
+  background: "#a1a5a9"
+  font: "#000000"
+  hover: "#00000"
+  card: "#f5f5f5"
+  button: "#0b74de"
+  product: "#ffffff"
+  buy: ""
+
+# Assets
+logo: "favicon-32x32.png"
+favicon: "favicon.ico"
+hero_image: "card.mov"
+  # Note: hero_image can be a video (mp4, mov) or an image (jpg, png)
+
+# Socials
+email: "prod.cxxl@gmail.com"
+snapchat: "prod.cxxl"
+instagram: "prod.cxxl"
+tiktok: "prod.cxxl"
+twitter: "prod.cxxl"
+soundcloud: "prod-cxxl"
+spotify: "https://open.spotify.com/artist/1oWfjjRo2dwQW1rz4BtVHu"
+
+#Snipcart Key
+snipcart_key: N2ZjMDA5YWEtYTExOS00YjI0LWJmZjEtMDBhYTk1YmJmZDUyNjM4NzY1MjYzOTExNzAyNzI4

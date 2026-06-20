@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Serve real files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Serve real directories
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route everything to index.php
+RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]

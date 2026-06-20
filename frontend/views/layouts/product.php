@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<main class="product-page">
+  <div class="product-container">
+
+    <!-- Product Gallery 
+    <div class="product-gallery">
+      {% if page.images %}
+        <div class="gallery-main">
+          <img src="{{ page.images[0] | relative_url }}" alt="{{ page.title }}">
+        </div>
+        <div class="gallery-thumbs">
+          {% for image in page.images %}
+            <img src="{{ image | relative_url }}" alt="{{ page.title }} thumbnail">
+          {% endfor %}
+        </div>
+      {% else %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+      {% endif %}
+    </div> 
+    -->
+
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h1>{{ page.title }}</h1>
+
+      <!-- Short Description & Price -->
+      <p class="product-description">
+        {{ page.description }}
+      </p>
+      <!--
+      <p class="product-price">${{ page.price }}</p>
+      -->
+
+      <!-- Long Description (outside front matter) -->
+      <div class="product-details">
+        {{ page.content }}
+      </div>
+
+      {% include product-definition.html product=page %}
+      
+    </div> 
+<div class="chart" style="position: relative; width:553px; height:313px;">
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRWErd6eX65MPiFUSNTjgcE1DLdX807jmIo4HKkJCXSXrq2uXbw7TwtgD2Tptg4sE55sJDoig1dRiz-/pubhtml?gid=260863677&single=true&widget=true&headers=false"
+    width="553"
+    height="313"
+    style="border:none;">
+  </iframe>
+
+  <!-- Top overlay mask -->
+  <div style="position:absolute; top:50; left:0; width:100%; height:30px; background:#a1a5a9;"></div>
+
+  <!-- Bottom overlay mask -->
+  <div style="position:absolute; bottom:-3px; left:0; width:100%; height:30px; background:#a1a5a9;"></div>
+</div>
+</main>
