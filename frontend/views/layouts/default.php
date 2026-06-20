@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <?php include __DIR__ . '/../partials/head.php'; ?>
-</head>
+
+<?php include __DIR__ . '/../partials/head.php'; ?>
 
 <body>
+
     <?php include __DIR__ . '/../partials/header-copy.php'; ?>
+
     <div class="overlay"></div>
-        <main class="site-main">
-            <?php include $viewPath; ?>
-        </main>
 
-    <?php include __DIR__ . '/../partials/footer.php'; 
-    ?>
+    <main class="site-main">
+        <?php include $viewPath; ?>
+    </main>
 
-    <script src="/frontend/assets/js/scripts.js"></script>
+    <?php include __DIR__ . '/../partials/footer.php'; ?>
+
+    <!--
+        Scripts loaded once at bottom of body.
+        defer ensures DOM is ready before execution.
+        Stripe checkout script only runs on pages with .stripe-buy buttons.
+    -->
+    <script src="/assets/js/scripts.js" defer></script>
+    <script src="/assets/js/stripe-checkout.js" defer></script>
 
 </body>
 </html>
+
 
