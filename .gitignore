@@ -1,0 +1,30 @@
+# HasMerch .gitignore
+
+# ─── Environment / Credentials ──────────────────────────────
+.env
+*.env
+.env.local
+.env.production
+
+# Database config with hardcoded credentials (use .env instead)
+/backend/config/db.php
+
+# ─── System Files ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+
+# ─── Dependencies ───────────────────────────────────────────
+/vendor/
+/node_modules/
+
+# ─── Editor / IDE ───────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Build Artifacts ────────────────────────────────────────
+/dist/
+/build/
