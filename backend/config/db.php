@@ -14,5 +14,5 @@ return [
     'host'   => getenv('DB_HOST')   ?: 'localhost',
     'dbname' => getenv('DB_NAME')   ?: 'hasmerch',
     'user'   => getenv('DB_USER')   ?: 'root',
-    'pass'   => getenv('DB_PASS')   ?: '',
+    'pass'   => getenv('DB_PASS')   ?: 'HasMerch@22',
 ];

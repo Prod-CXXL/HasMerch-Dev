@@ -24,13 +24,17 @@ class ContentService
      */
     public static function loadProducts(string $storeFolder): array
     {
-        $productsDir = rtrim($storeFolder, '/') . '/products';
+
+        $productsDir = self::normalisePath($storeFolder) . DIRECTORY_SEPARATOR . 'products';
 
         if (!is_dir($productsDir)) {
             return [];
         }
 
-        $files = glob($productsDir . '/*.md');
+        // Use forward slashes for glob() — it accepts them on all platforms
+        // including Windows, and avoids glob() returning false on mixed paths.
+        $globPattern = str_replace('\\', '/', $productsDir) . '/*.md';
+        $files       = glob($globPattern);
 
         if (empty($files)) {
             return [];
@@ -69,13 +73,14 @@ class ContentService
      */
     public static function loadProduct(string $storeFolder, string $identifier): ?array
     {
-        $productsDir = rtrim($storeFolder, '/') . '/products';
+        $productsDir = self::normalisePath($storeFolder) . DIRECTORY_SEPARATOR . 'products';
 
         if (!is_dir($productsDir)) {
             return null;
         }
 
-        $files = glob($productsDir . '/*.md');
+        $globPattern = str_replace('\\', '/', $productsDir) . '/*.md';
+        $files       = glob($globPattern);
 
         if (empty($files)) {
             return null;
@@ -113,6 +118,13 @@ class ContentService
         if ($raw === false) {
             return null;
         }
+
+        // Normalise Windows line endings (CRLF → LF) before any parsing.
+        // Files created or edited on Windows contain \r\n. Without this, the
+        // YAML regex fails to match and every parsed value has a trailing \r,
+        // causing 'available' === 'true\r' to never equal 'true'.
+        $raw = str_replace("\r\n", "\n", $raw);
+        $raw = str_replace("\r", "\n", $raw); // legacy Mac CR-only, belt-and-suspenders
 
         // Require opening --- delimiter
         if (strpos(ltrim($raw), '---') !== 0) {
@@ -289,3 +301,20 @@ class ContentService
 
         return $html;
     }
+
+    /**
+     * Normalise a filesystem path for the current OS.
+     *
+     * Converts all forward and backward slashes to DIRECTORY_SEPARATOR,
+     * then removes any trailing separator. This ensures is_dir() and
+     * path concatenation work correctly on both Windows (XAMPP) and Unix.
+     *
+     * @param  string $path
+     * @return string
+     */
+    private static function normalisePath(string $path): string
+    {
+        $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+        return rtrim($path, DIRECTORY_SEPARATOR);
+    }
+}
