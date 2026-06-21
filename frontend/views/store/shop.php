@@ -9,6 +9,7 @@
  */
 
 // Group products into categories and coming-soon
+
 $grouped    = [];
 $comingSoon = [];
 
