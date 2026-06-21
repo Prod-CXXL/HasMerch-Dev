@@ -1,6 +1,6 @@
 # HasMerch .gitignore
 
-# ─── Environment / Credentials ──────────────────────────────
+# Environment / Credentials
 .env
 *.env
 .env.local
@@ -9,22 +9,22 @@
 # Database config with hardcoded credentials (use .env instead)
 /backend/config/db.php
 
-# ─── System Files ───────────────────────────────────────────
+# System Files
 .DS_Store
 Thumbs.db
 *.log
 *.cache
 
-# ─── Dependencies ───────────────────────────────────────────
+# Dependencies
 /vendor/
 /node_modules/
 
-# ─── Editor / IDE ───────────────────────────────────────────
+# Editor / IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# ─── Build Artifacts ────────────────────────────────────────
+# Build Artifacts
 /dist/
 /build/
