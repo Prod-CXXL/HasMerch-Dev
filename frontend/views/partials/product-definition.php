@@ -1,26 +1,38 @@
-{% assign item = include.product | default: page %}
+<?php
+/**
+ * Product definition partial — buy button or coming-soon
+ *
+ * Expects $product array in scope.
+ * Fields used: available, identifier, slug, title, price, image, description
+ */
 
-{% if item.available == false %}
-  <button class="buy-button coming-soon" disabled>
-    COMING SOON
-  </button>
-{% else %}
-<!--
-  <button
-    class="buy-button snipcart-add-item"
-    data-item-id="{{ item.identifier | default: item.slug }}"
-    data-item-name="{{ item.title }}"
-    data-item-price="{{ item.price }}"
-    data-item-url="{{ site.baseurl }}{{ item.url }}"
-    data-item-image="{{ site.baseurl }}{{ item.image }}"
-    data-item-description="{{ item.description }}">
-    Add to cart (${{ item.price }})
-  </button>
--->
- <button class="buy-button stripe-buy"
-  data-name="{{ page.title }}"
-  data-price="{{ page.price | times: 100 | round }}">
-  Buy with Stripe (${{ page.price }})
-</button>
+$isAvailable = !empty($product['available']) && $product['available'] === true;
 
-{% endif %}
+$identifier  = htmlspecialchars($product['identifier'] ?? $product['slug'] ?? '', ENT_QUOTES, 'UTF-8');
+$title       = htmlspecialchars($product['title']      ?? '',                      ENT_QUOTES, 'UTF-8');
+$price       = isset($product['price']) ? (float)$product['price'] : 0.00;
+$priceCents  = (int)round($price * 100);
+$priceFormatted = number_format($price, 2);
+$image       = htmlspecialchars($product['image'] ?? ($product['images'][0] ?? ''), ENT_QUOTES, 'UTF-8');
+$description = htmlspecialchars($product['description'] ?? '', ENT_QUOTES, 'UTF-8');
+?>
+
+<?php if (!$isAvailable): ?>
+
+    <button class="buy-button coming-soon" disabled>
+        COMING SOON
+    </button>
+
+<?php else: ?>
+
+    <button
+        class="buy-button stripe-buy"
+        data-name="<?= $title ?>"
+        data-price="<?= $priceCents ?>"
+        data-identifier="<?= $identifier ?>"
+        data-image="<?= $image ?>"
+        data-description="<?= $description ?>">
+        Buy with Stripe ($<?= $priceFormatted ?>)
+    </button>
+
+<?php endif; ?>
