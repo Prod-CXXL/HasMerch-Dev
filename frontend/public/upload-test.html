@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HasMerch Upload Test</title>
+</head>
+<body>
+
+<h1>Upload Logo Test</h1>
+
+<input type="file" id="file">
+
+<button onclick="uploadLogo()">
+    Upload Logo
+</button>
+
+<pre id="output"></pre>
+
+<script>
+
+async function uploadLogo() {
+
+    const file =
+        document.getElementById("file")
+        .files[0];
+
+    if (!file) {
+        alert("Select a file first.");
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("slug", "cxxl");
+
+    const response =
+        await fetch(
+            "http://127.0.0.1:8787/api/upload-logo",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+    const result =
+        await response.json();
+
+    document.getElementById("output")
+        .textContent =
+        JSON.stringify(result, null, 2);
+}
+
+</script>
+
+</body>
+</html>
